@@ -1,0 +1,33 @@
+@import "constants";
+
+.hideForMobile {
+    display: block;
+
+    @media (min-width: $ipad-min-width) and (max-width: $ipad-max-width) {
+        display: none;
+    }
+
+    @media (min-width: $tablet-and-mobile-min-width) and (max-width: $tablet-and-mobile-max-width) {
+        display: none;
+    }
+
+    @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
+        display: none;
+    }
+}
+
+.showForMobile {
+    display: none;
+
+    @media (min-width: $ipad-min-width) and (max-width: $ipad-max-width) {
+        display: inherit;
+    }
+
+    @media (min-width: $tablet-and-mobile-min-width) and (max-width: $tablet-and-mobile-max-width) {
+        display: inherit;
+    }
+
+    @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
+        display: inherit;
+    }
+}

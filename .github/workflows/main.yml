@@ -1,0 +1,59 @@
+name: Checks
+on:
+  pull_request:
+    branches:
+      - master
+      - dev
+jobs:
+  cancelActiveWorkflows:
+    name: Cancel Previous Workflow Runs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cancel Previous Workflow Runs
+        uses: styfle/cancel-workflow-action@0.9.1
+        with:
+          access_token: ${{ github.token }}
+  install_yarn:
+    name: Install Yarn
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Yarn
+        run: npm install -g yarn
+  install_packages:
+    name: Install Packages
+    runs-on: ubuntu-latest
+    needs: install_yarn
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Packages
+        run: yarn
+      - uses: actions/cache@v2
+        id: restore-packages
+        with:
+          path: ./*
+          key: ${{ github.sha }}
+  test_prettier:
+    name: Prettier
+    needs: install_packages
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        id: restore-packages
+        with:
+          path: ./*
+          key: ${{ github.sha }}
+      - run: yarn format
+  test_eslint:
+    name: Eslint
+    needs: install_packages
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        id: restore-packages
+        with:
+          path: ./*
+          key: ${{ github.sha }}
+      - run: yarn lint
