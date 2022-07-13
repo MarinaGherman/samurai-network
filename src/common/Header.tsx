@@ -8,16 +8,20 @@ const Header = () => {
     return (
         <div className={s.header}>
         <Row>
-            <Col span={1}>
-                <div>
-                    <img src={logo} alt=""/>
+            <Col span={6}>
+                <div className={s.logo}>
+                    <img src={logo} alt="logo"/>
                 </div>
             </Col>
-            <Col span={10}>
-               <div></div>
+            <Col span={12}>
+               <Row>
+                   <Col span={8}>Profile</Col>
+                   <Col span={8}>Dialogs</Col>
+                   <Col span={8}>Users</Col>
+               </Row>
             </Col>
-            <Col span={1}>
-                <div></div>
+            <Col span={6}>
+                <div>login</div>
             </Col>
         </Row>
             
